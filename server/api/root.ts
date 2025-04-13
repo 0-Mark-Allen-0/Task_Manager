@@ -1,6 +1,6 @@
 //Import the custom router configuration and our taskRouter with all created routes
 import { router } from "../trpc";
-import { taskRouter } from "../api/routers/task";
+import { taskRouter } from "./routers/task";
 
 //appRouter acts as the root router of the entire tRPC project
 //It will combine all sub-routers into one router object

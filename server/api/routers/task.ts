@@ -5,7 +5,6 @@ import { z } from "zod";
 
 //Importing tRPC utilities:
 import { router, publicProcedure } from "@/server/trpc";
-import { create } from "node:domain";
 
 //Define a new tRPC router for all task operations
 export const taskRouter = router({
@@ -35,7 +34,7 @@ export const taskRouter = router({
           ...input,
           dueDate: new Date(input.dueDate),
           completed: false,
-          userId: "placeholder-user-id",
+          userId: "cm9fihfcw0000r6408cng7k8w",
         },
       });
     }),

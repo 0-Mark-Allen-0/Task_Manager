@@ -1,14 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-//Defining the Database schema in Prisma, will be reflected in Postgres
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
+  // output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -17,17 +9,17 @@ datasource db {
 }
 
 model User {
-  id  String @id @default(cuid())
+  id    String @id @default(cuid())
   email String @unique
   tasks Task[]
 }
 
 model Task {
-  id String @id @default(cuid())
-  title String
-  priority String
-  completed Boolean @default(false)
-  dueDate DateTime
-  userId String
-  user User @relation(fields: [userId], references: [id]) //Foreign Key Decleration
+  id        String   @id @default(cuid())
+  title     String
+  priority  String
+  completed Boolean  @default(false)
+  dueDate   DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }

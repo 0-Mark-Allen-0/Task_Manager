@@ -147,7 +147,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -165,8 +165,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id    String @id @default(cuid())\n  email String @unique\n  tasks Task[]\n}\n\nmodel Task {\n  id        String   @id @default(cuid())\n  title     String\n  priority  String\n  completed Boolean  @default(false)\n  dueDate   DateTime\n  userId    String\n  user      User     @relation(fields: [userId], references: [id]) //Foreign Key Decleration\n}\n",
-  "inlineSchemaHash": "cf90a3c2955010c3dc12fae58eda08b270388a5f0c325c8b761780def654ef1b",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id    String @id @default(cuid())\n  email String @unique\n  tasks Task[]\n}\n\nmodel Task {\n  id        String   @id @default(cuid())\n  title     String\n  priority  String\n  completed Boolean  @default(false)\n  dueDate   DateTime\n  userId    String\n  user      User     @relation(fields: [userId], references: [id])\n}\n",
+  "inlineSchemaHash": "aeef11d7aceafacf84a253ef2640e410a7c32488c58059930e8f7da5664b77a9",
   "copyEngine": true
 }
 config.dirname = '/'

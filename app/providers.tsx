@@ -19,7 +19,7 @@ import superjson from "superjson";
 const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: "@/server/api/trpc",
+      url: "/api/trpc",
       transformer: superjson,
       fetch(url, options) {
         return fetch(url, {
@@ -31,7 +31,7 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-export default function Proivders({ children }: { children: ReactNode }) {
+export default function Providers({ children }: { children: ReactNode }) {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
