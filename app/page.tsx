@@ -72,7 +72,7 @@ export default function HomePage() {
   console.log("Tasks data:", tasks);
 
   return (
-    <main className="p-6 max-w-xl mx-auto space-y-6">
+    <main className="p-6 max-w-xl mx-auto space-y-6 mt-24">
       <h1 className="text-2xl font-bold">Task Manager</h1>
 
       {/* Task Form */}
@@ -121,7 +121,7 @@ export default function HomePage() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all delay-75"
+          className="bg-black text-lime-300 px-4 py-2 rounded hover:scale-110 transition-all delay-75"
           disabled={createTask.status == "pending"}
         >
           {createTask.status == "pending" ? "Creating..." : "Create"}
