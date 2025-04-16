@@ -4,18 +4,20 @@ import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 
 //Importing tRPC utilities:
-import { router, publicProcedure } from "@/server/trpc";
+import { router, publicProcedure, protectedProcedure } from "@/server/trpc";
 
 //Define a new tRPC router for all task operations
 export const taskRouter = router({
   //To get all tasks from the database:
-  getAll: publicProcedure.query(() => {
+  getAll: publicProcedure.query(({ ctx }) => {
     //Prisma's built-in findMany() method will fetch all tasks
-    return prisma.task.findMany();
+    return prisma.task.findMany({
+      where: { userId: ctx.session?.user?.id },
+    });
   }),
 
   //To create a new task:
-  create: publicProcedure
+  create: protectedProcedure
     .input(
       z.object({
         title: z.string(),
@@ -24,7 +26,7 @@ export const taskRouter = router({
       })
     )
     //This procedure will modify the database, hence it is called a mutation
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       //Creating a new task using Prisma
       //Using spread to spread out the input values (title, priority, due date)
       return await prisma.task.create({
@@ -34,7 +36,7 @@ export const taskRouter = router({
           ...input,
           dueDate: new Date(input.dueDate),
           completed: false,
-          userId: "cm9fihfcw0000r6408cng7k8w",
+          userId: ctx.session.user.id, //Manually created key through Prisma Studio: "cm9fihfcw0000r6408cng7k8w"
         },
       });
     }),
